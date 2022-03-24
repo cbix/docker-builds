@@ -1,6 +1,22 @@
 ---
 kind: pipeline
 type: docker
+name: commit
+
+steps:
+  - name: do nothing
+    image: alpine:3.15
+    commands:
+      - echo "You can now promote different targets manually"
+
+trigger:
+  event:
+    exclude:
+      - promote
+
+---
+kind: pipeline
+type: docker
 name: mod-plugin-builder amd64
 
 platform:
