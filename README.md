@@ -1,5 +1,5 @@
 # docker-builds
-[![Build Status](https://ci.cbix.de/api/badges/cbix/docker-builds/status.svg)](https://ci.cbix.de/cbix/docker-builds)
+[![Build Status](https://ci.cbix.de/api/badges/cbix/docker-builds/status.svg?ref=refs/heads/master)](https://ci.cbix.de/cbix/docker-builds)
 
 Drone.io pipeline to trigger building some 3rd party docker images.
 
