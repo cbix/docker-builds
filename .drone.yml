@@ -1,0 +1,73 @@
+---
+kind: pipeline
+type: docker
+name: mod-plugin-builder amd64
+
+platform:
+  os: linux
+  arch: amd64
+
+clone:
+  disable: true
+
+steps:
+  - name: clone
+    image: alpine/git
+    commands:
+      - git clone --depth 1 https://github.com/moddevices/mod-plugin-builder .
+
+  - name: build
+    image: plugins/docker
+    settings:
+      repo: cbix/mod-plugin-builder
+      username:
+        from_secret: docker-user
+      password:
+        from_secret: docker-pass
+      dockerfile: docker/Dockerfile
+      build_args:
+        - platform=${platform:-moddwarf}
+      tags:
+        - ${platform:-moddwarf}
+        - ${platform:-moddwarf}-amd64
+
+trigger:
+  event:
+    - custom
+
+---
+kind: pipeline
+type: docker
+name: mod-plugin-builder arm64
+
+platform:
+  os: linux
+  arch: arm64
+
+clone:
+  disable: true
+
+steps:
+  - name: clone
+    image: alpine/git
+    commands:
+      - git clone --depth 1 https://github.com/moddevices/mod-plugin-builder .
+
+  - name: build
+    image: plugins/docker
+    settings:
+      repo: cbix/mod-plugin-builder
+      username:
+        from_secret: docker-user
+      password:
+        from_secret: docker-pass
+      dockerfile: docker-arm64/Dockerfile
+      build_args:
+        - platform=${platform:-moddwarf}
+      tags:
+        - ${platform:-moddwarf}
+        - ${platform:-moddwarf}-arm64
+
+trigger:
+  event:
+    - custom
