@@ -20,20 +20,19 @@ steps:
     image: plugins/docker
     settings:
       repo: cbix/mod-plugin-builder
-      username:
-        from_secret: docker-user
+      username: cbix
       password:
         from_secret: docker-pass
       dockerfile: docker/Dockerfile
       build_args:
         - platform=${platform:-moddwarf}
-      tags:
-        - ${platform:-moddwarf}
-        - ${platform:-moddwarf}-amd64
+      tags: ${platform:-moddwarf}-amd64
 
 trigger:
   event:
-    - custom
+    - promote
+  target:
+    - mod-plugin-builder
 
 ---
 kind: pipeline
@@ -57,17 +56,48 @@ steps:
     image: plugins/docker
     settings:
       repo: cbix/mod-plugin-builder
-      username:
-        from_secret: docker-user
+      username: cbix
       password:
         from_secret: docker-pass
       dockerfile: docker-arm64/Dockerfile
       build_args:
         - platform=${platform:-moddwarf}
-      tags:
-        - ${platform:-moddwarf}
-        - ${platform:-moddwarf}-arm64
+      tags: ${platform:-moddwarf}-arm64
 
 trigger:
   event:
-    - custom
+    - promote
+  target:
+    - mod-plugin-builder
+
+---
+kind: pipeline
+type: docker
+name: mod-plugin-builder manifest
+
+clone:
+  disable: true
+
+steps:
+  - name: push
+    image: plugins/manifest
+    settings:
+      username: cbix
+      password:
+        from_secret: docker-pass
+      target: cbix/mod-plugin-builder:${platform:-moddwarf}
+      template: cbix/mod-plugin-builder:${platform:-moddwarf}-ARCH
+      platforms:
+        - linux/amd64
+        - linux/arm64
+      ignore_missing: true
+
+depends_on:
+  - mod-plugin-builder amd64
+  - mod-plugin-builder arm64
+
+trigger:
+  event:
+    - promote
+  target:
+    - mod-plugin-builder
