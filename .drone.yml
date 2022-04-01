@@ -117,3 +117,53 @@ trigger:
     - promote
   target:
     - mod-plugin-builder
+
+---
+kind: pipeline
+type: docker
+name: Update amd64 images
+
+clone:
+  disable: true
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: Update archlinux image
+    image: archlinux/archlinux:base-devel
+    pull: always
+    commands:
+      - echo Image updated
+
+trigger:
+  event:
+    - cron
+  cron:
+    - weekly
+
+---
+kind: pipeline
+type: docker
+name: Update arm64 images
+
+clone:
+  disable: true
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+  - name: Update archlinux image
+    image: lopsided/archlinux:devel
+    pull: always
+    commands:
+      - echo Image updated
+
+trigger:
+  event:
+    - cron
+  cron:
+    - weekly
