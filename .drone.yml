@@ -140,8 +140,6 @@ steps:
 trigger:
   event:
     - cron
-  cron:
-    - weekly
 
 ---
 kind: pipeline
@@ -165,5 +163,3 @@ steps:
 trigger:
   event:
     - cron
-  cron:
-    - weekly
