@@ -161,7 +161,7 @@ platform:
 
 steps:
   - name: Update archlinux image
-    image: lopsided/archlinux:devel
+    image: lopsided/archlinux-arm64v8:devel
     pull: always
     commands:
       - echo Image updated
