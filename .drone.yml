@@ -81,7 +81,7 @@ steps:
       username: cbix
       password:
         from_secret: docker-pass
-      dockerfile: docker-arm64/Dockerfile
+      dockerfile: docker/Dockerfile
       build_args:
         - platform=${platform:-moddwarf}
       tags: ${platform:-moddwarf}-arm64
