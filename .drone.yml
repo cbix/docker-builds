@@ -169,3 +169,25 @@ steps:
 trigger:
   event:
     - cron
+
+---
+kind: pipeline
+type: docker
+name: Test rollback
+
+platform:
+  os: linux
+  arch: amd64
+
+clone:
+  disable: true
+
+steps:
+  - name: print info
+    image: archlinux/archlinux:base-devel
+    commands:
+      - env
+
+trigger:
+  event:
+    - rollback
