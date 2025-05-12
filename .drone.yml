@@ -162,11 +162,6 @@ steps:
     pull: always
     commands:
       - echo Image updated
-  - name: Update hugo image
-    image: klakegg/hugo:busybox
-    pull: always
-    commands:
-      - echo Image updated
   - name: Update drone-matrixchat-notify image
     image: spotlightkid/drone-matrixchat-notify
     pull: always
