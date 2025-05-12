@@ -142,6 +142,41 @@ steps:
     pull: always
     commands:
       - echo Image updated
+  - name: Update alpine image
+    image: alpine
+    pull: always
+    commands:
+      - echo Image updated
+  - name: Update gpgsign image
+    image: plugins/gpgsign
+    pull: always
+    commands:
+      - echo Image updated
+  - name: Update drone-scp image
+    image: appleboy/drone-scp
+    pull: always
+    commands:
+      - echo Image updated
+  - name: Update hugo image
+    image: klakegg/hugo:busybox
+    pull: always
+    commands:
+      - echo Image updated
+  - name: Update hugo image
+    image: klakegg/hugo:busybox
+    pull: always
+    commands:
+      - echo Image updated
+  - name: Update drone-matrixchat-notify image
+    image: spotlightkid/drone-matrixchat-notify
+    pull: always
+    commands:
+      - echo Image updated
+  - name: Update drone-github-app image
+    image: rssnyder/drone-github-app
+    pull: always
+    commands:
+      - echo Image updated
 
 trigger:
   event:
@@ -162,6 +197,21 @@ platform:
 steps:
   - name: Update archlinux image
     image: lopsided/archlinux-arm64v8:devel
+    pull: always
+    commands:
+      - echo Image updated
+  - name: Update alpine image
+    image: alpine
+    pull: always
+    commands:
+      - echo Image updated
+  - name: Update gpgsign image
+    image: plugins/gpgsign
+    pull: always
+    commands:
+      - echo Image updated
+  - name: Update drone-scp image
+    image: appleboy/drone-scp
     pull: always
     commands:
       - echo Image updated
